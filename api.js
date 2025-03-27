@@ -1,15 +1,14 @@
-const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
+const BASE_URL = "https://jsonplaceholder.typicode.com/users";
 
 export function getPosts() {
-    return fetch (BASE_URL)
-    .then ((response) => {
+    try {
+        const response = await fetch(BASE_URL);
         if (!response.ok) {
-            throw new error (`HTTP error: ${response.status}`);
+            throw new error(`HTTP error: ${response.status}`);
         }
-        return response .json();
-    })
-    .catch (error=> {
+        return await response.json();
+    } catch (error) {
         console.error('Fetch failed:', error.message);
         throw error;
-    });
+    }
 }
